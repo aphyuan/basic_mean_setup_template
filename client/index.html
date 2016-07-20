@@ -13,9 +13,11 @@
       $routeProvider
         .when('/',{
             templateUrl: 'partials/partial1.html',
+            controller: 'view1Controller'
         })
         .when('/partial2',{
-            templateUrl: 'partials/partial2.html'
+            templateUrl: 'partials/partial2.html',
+            controller: 'view2Controller'
         })
         .otherwise({
           redirectTo: '/'
