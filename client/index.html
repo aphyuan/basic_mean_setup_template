@@ -1,32 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='app'>
+<html>
   <head>
-    <meta charset="utf-8">
-    <title>Document</title>
-    <script src="angular/angular.js" charset="utf-8"></script>
-    <script src="angular-route/angular-route.js" charset="utf-8"></script>
-    <script>
-    var app = angular.module('app', ['ngRoute']);
-    app.config(function ($routeProvider){
+    <title></title>
+ <!-- THESE TWO VERSIONS BELOW MUST MATCH (good thing bower will catch that for us, but be aware if you are using CDN's)!!! -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+<script>
+    //  inject the ngRoute dependency in the module.
+    var myApp = angular.module('myApp', ['ngRoute']);
+    //  use the config method to set up routing:
+    myApp.config(function ($routeProvider) {
       $routeProvider
-        .when('/', {
-          templateUrl: 'partials/partial1.html'
+        .when('/',{
+            templateUrl: 'partials/partial1.html',
         })
-        .when('/partial2', {
-          templateUrl: 'partials/partial2.html'
+        .when('/partial2',{
+            templateUrl: 'partials/partial2.html'
         })
         .otherwise({
-          redirectTo:'/'
+          redirectTo: '/'
         });
+    });
+    //  build the controllers
+    myApp.controller('view1Controller', function ($scope) {
+      $scope.sports = ['golf', 'basketball', 'hockey', 'tennis', 'football'];
+    });
+    myApp.controller('view2Controller', function ($scope) {
+      $scope.message = 'We are using another controller';
     });
     </script>
   </head>
   <body>
-    <div ng-view>
-      <!-- Partials will load here! -->
+    <div ng-app='myApp'>
+        <a href="#/">Partial 1</a> | <a href="#/partial2">Partial 2</a>
+        <div ng-view="">
+        </div>
     </div>
-    <h1>hello world</h1>
-    <a href="#/">Partial1</a>
-    <a href="#/partial2">Partial2</a>
   </body>
 </html>
